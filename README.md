@@ -29,12 +29,12 @@ python main.py
 If there are any errors, make sure you have all the dependencies installed.
 
 From here, it should open a GUI with two empty lists. To load the biomes
-traveled to and ones that have yet to be found, File > Open World Folder.
+traveled to and ones that have yet to be found select "File" -> "Open World Folder."
 Navigate to the folder that contains the Minecraft save you wish to list biomes
 for, select it, and click "Open Folder."
 
-This is a list of where Mineraft Saves are located:
-- Windows: %AppData%\.minecraft\saves
+This is a list of where Minecraft Saves are located:
+- Windows: %AppData%\\.minecraft\\saves
 - OS X: ~/Library/Application Support/minecraft/saves/
 - Linux: ~/.minecraft/saves
 
