@@ -30,7 +30,7 @@ If there are any errors, make sure you have all the dependencies installed.
 
 From here, it should open a GUI with two empty lists. To load the biomes
 traveled to and ones that have yet to be found select "File" -> "Open World Folder."
-Navigate to the folder that contains the Minecraft save you wish to list biomes
+(1) Navigate to the folder that contains the Minecraft save you wish to list biomes
 for, select it, and click "Open Folder."
 
 This is a list of where Minecraft Saves are located:
@@ -40,6 +40,9 @@ This is a list of where Minecraft Saves are located:
 
 This should list the biomes that have been explored and those which have not
 in their respective lists (image below shows this).
+
+**NOTE**: This program doesn't auto-reload the biome lists. The above process
+from (1) has to be redone in order to reload the biome lists.
 
 ![Biome Traveler Window](http://i.imgur.com/loDSS1R.png)
 
