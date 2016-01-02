@@ -69,6 +69,7 @@ class Window(wx.Frame):
         self.SetTitle('Biome Traveler')
         self.Show(True)
 
+    # Writes biomes to respective lists and clear them on reload.
     def WriteToPage(self, inlist):
         # Clear listboxes to prevent duplicates.
         self.explored_biomes.Clear()
