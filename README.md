@@ -48,3 +48,9 @@ The program has only been tested with Minecraft version 1.8.9 and snapshot
 15w51b. However, it should work with all snapshots and versions between 1.8.9
 and snapshot 15w51b. It is unknown whether or not it will work with other
 versions.
+
+The compiled EXE should work with Windows 7+, however it has only been tested
+with Windows 10 Build 10586.
+
+#### License:
+This program is under the MIT license. More details are in the LICENSE file.
