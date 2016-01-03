@@ -4,7 +4,7 @@
 Biome Traveler - Nick Pleatsikas
 
 Lists the biomes that a user has been to and which one's they have to go to
-in order to complete the 'Adventure Time' achievement in Minecraft.
+in order to complete the 'Adventuring Time' achievement in Minecraft.
 """
 
 # Libraries:

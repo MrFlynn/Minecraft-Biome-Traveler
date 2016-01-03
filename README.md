@@ -3,7 +3,7 @@
 
 #### Description:
 This program lists the biomes that a Minecraft player has traveled to and what
-biomes they have not. It is intended to help those with the "Adventure Time"
+biomes they have not. It is intended to help those with the "Adventuring Time"
 achievement.
 
 #### Installation/Download:
