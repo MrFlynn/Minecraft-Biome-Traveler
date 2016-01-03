@@ -1,0 +1,7 @@
+# Ignore compiled executables:
+*.exe
+
+# Ignore PyInstaller Files:
+build/
+dist/
+*.spec
