@@ -1,5 +1,7 @@
 # Ignore compiled executables:
 *.exe
+*.dmg
+*.o
 
 # Ignore PyInstaller Files:
 build/
