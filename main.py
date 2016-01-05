@@ -8,17 +8,34 @@ in order to complete the 'Adventuring Time' achievement in Minecraft.
 """
 
 # Libraries:
-import wx
+import sys
 import os
+import wx
 import json
 
 # Global variables:
-biome_list = ["Beach", "Birch Forest", "Birch Forest Hills", "Cold Beach", "Cold Taiga", "Cold Taiga Hills",
-              "Deep Ocean", "Desert", "Desert Hills", "Extreme Hills", "Extreme Hills+", "Forest", "ForestHills",
-              "FrozenRiver", "Ice Mountains", "Ice Plains", "Jungle", "Jungle Edge", "Jungle Hills", "Mega Taiga",
-              "Mega Taiga Hills", "Mesa", "Mesa Plateau", "Mesa Plateau F", "Mushroom Island", "MushroomIslandShore",
-              "Ocean", "Plains", "River", "Roofed Forest", "Savanna", "Savanna Plateau", "Stone Beach",
-              "Swampland", "Taiga", "Taiga Hills"]
+biome_list = ["Beach", "Birch Forest", "Birch Forest Hills", "Cold Beach",
+                "Cold Taiga", "Cold Taiga Hills", "Deep Ocean", "Desert",
+                "Desert Hills", "Extreme Hills", "Extreme Hills+", "Forest",
+                "ForestHills", "FrozenRiver", "Ice Mountains", "Ice Plains",
+                "Jungle", "Jungle Edge", "Jungle Hills", "Mega Taiga",
+                "Mega Taiga Hills", "Mesa", "Mesa Plateau", "Mesa Plateau F",
+                "Mushroom Island", "MushroomIslandShore", "Ocean", "Plains",
+                "River", "Roofed Forest", "Savanna", "Savanna Plateau",
+                "Stone Beach", "Swampland", "Taiga", "Taiga Hills"]
+
+os_ = sys.platform
+username = os.environ['USERNAME']
+
+if os_ == 'linux2':
+    start_path = "/home/%s/" % (username, )
+if os_ == 'win32':
+    start_path = "C:\Users\%s\AppData\Roaming\.minecraft\saves" % (username, )
+if os_ == 'darwin':
+    start_path = ("/home/%s/Library/Application Support/minecraft/saves/"
+                    % (username,))
+else:
+    pass
 
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
@@ -51,12 +68,16 @@ class Window(wx.Frame):
 
         # Listbox for explored biomes.
         panel1 = wx.Panel(MainPanel, -1, pos=(0,100))
-        self.explored_biomes = wx.ListBox(panel1, -1, size=(150,250), pos=(0,20))
-        wx.StaticText(panel1, id=-1, label="Discovered Biomes",style=wx.ALIGN_CENTER, name="")
+        self.explored_biomes = wx.ListBox(panel1, -1, size=(150,250),
+                                            pos=(0,20))
+        wx.StaticText(panel1, id=-1, label="Discovered Biomes",
+                        style=wx.ALIGN_CENTER, name="")
         # Listbox for unexplored biomes.
         panel2 = wx.Panel(MainPanel, -1,pos=(0,200))
-        self.unexplored_biomes = wx.ListBox(panel2, -1, size=(150,250), pos=(0,20))
-        wx.StaticText(panel2, id=-1, label="Undiscovered Biomes",style=wx.ALIGN_CENTER, name="")
+        self.unexplored_biomes = wx.ListBox(panel2, -1, size=(150,250),
+                                                pos=(0,20))
+        wx.StaticText(panel2, id=-1, label="Undiscovered Biomes",
+                        style=wx.ALIGN_CENTER, name="")
 
         # Set sizing for panels.
         sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -86,7 +107,8 @@ class Window(wx.Frame):
     # Open file.
     def OnOpen(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
-        dlg = wx.DirDialog(self, "Choose the world folder.")
+        dlg = wx.DirDialog(self, message="Choose the world folder.",
+                            defaultPath=start_path)
         if dlg.ShowModal() == wx.ID_OK:
             world_stats_dir = dlg.GetPath() + "\stats\\"
         dlg.Destroy()
@@ -97,9 +119,11 @@ class Window(wx.Frame):
                 stats_file_name = file
 
         # Opens stats file and extracts list of explored biomes.
-        stats_file = open(world_stats_dir + stats_file_name, "r")
-        explored_biomes = (json.loads(stats_file.read())).get("achievement.exploreAllBiomes").get("progress")
-        encoded = [i.encode('utf-8') for i in explored_biomes]
+        with open(world_stats_dir + stats_file_name, "r") as stats_file:
+            explored_biomes = ((json.loads(stats_file.read()))
+                                .get("achievement.exploreAllBiomes")
+                                .get("progress"))
+            encoded = [i.encode('utf-8') for i in explored_biomes]
         self.WriteToPage(encoded)
 
     # Quit command.
