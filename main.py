@@ -25,17 +25,17 @@ biome_list = ["Beach", "Birch Forest", "Birch Forest Hills", "Cold Beach",
                 "Stone Beach", "Swampland", "Taiga", "Taiga Hills"]
 
 os_ = sys.platform
-username = os.environ['USERNAME']
+home_dir = os.path.expanduser('~')
 
 if os_ == 'linux2':
-    start_path = "/home/%s/" % (username, )
-if os_ == 'win32':
-    start_path = "C:\Users\%s\AppData\Roaming\.minecraft\saves" % (username, )
-if os_ == 'darwin':
-    start_path = ("/home/%s/Library/Application Support/minecraft/saves/"
-                    % (username,))
+    start_path = "%s/.minecraft/saves" % (home_dir, )
+elif os_ == 'win32':
+    start_path = "%s\AppData\Roaming\.minecraft\saves" % (home_dir, )
+elif os_ == 'darwin':
+    start_path = ("%s/Library/Application Support/minecraft/saves"
+                    % (home_dir,))
 else:
-    pass
+    home_dir
 
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
@@ -71,13 +71,13 @@ class Window(wx.Frame):
         self.explored_biomes = wx.ListBox(panel1, -1, size=(150,250),
                                             pos=(0,20))
         wx.StaticText(panel1, id=-1, label="Discovered Biomes",
-                        style=wx.ALIGN_CENTER, name="")
+                        style=wx.ALIGN_CENTER)
         # Listbox for unexplored biomes.
         panel2 = wx.Panel(MainPanel, -1,pos=(0,200))
         self.unexplored_biomes = wx.ListBox(panel2, -1, size=(150,250),
                                                 pos=(0,20))
         wx.StaticText(panel2, id=-1, label="Undiscovered Biomes",
-                        style=wx.ALIGN_CENTER, name="")
+                        style=wx.ALIGN_CENTER)
 
         # Set sizing for panels.
         sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -110,7 +110,10 @@ class Window(wx.Frame):
         dlg = wx.DirDialog(self, message="Choose the world folder.",
                             defaultPath=start_path)
         if dlg.ShowModal() == wx.ID_OK:
-            world_stats_dir = dlg.GetPath() + "\stats\\"
+            if os_ == 'win32':
+                world_stats_dir = dlg.GetPath() + "\stats\\"
+            else: # for linux, darwin, and other.
+                world_stats_dir = dlg.GetPath() + "/stats/"
         dlg.Destroy()
 
         # Finds .json file with stats info. Outputs file name.
