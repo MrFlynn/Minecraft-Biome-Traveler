@@ -30,16 +30,10 @@ If there are any errors, make sure you have all the dependencies installed.
 
 From here, it should open a GUI with two empty lists. To load the biomes
 traveled to and ones that have yet to be found select "File" -> "Open World Folder."
-(1) Navigate to the folder that contains the Minecraft save you wish to list biomes
-for, select it, and click "Open Folder."
-
-This is a list of where Minecraft Saves are located:
-- Windows: %AppData%\\.minecraft\\saves
-- OS X: ~/Library/Application Support/minecraft/saves/
-- Linux: ~/.minecraft/saves
-
-This should list the biomes that have been explored and those which have not
-in their respective lists (image below shows this).
+(1) This will open a window with all of your Minecraft saves. Select the one you
+wish to see stats on and then click "Open" or "Open Folder." You should see a
+list of biomes you have explored and which ones you need to explore in order
+to complete the Adventuring Time achievement.
 
 **NOTE**: This program doesn't auto-reload the biome lists. The above process
 from (1) has to be redone in order to reload the biome lists.
@@ -48,12 +42,15 @@ from (1) has to be redone in order to reload the biome lists.
 
 #### Compatibility:
 The program has only been tested with Minecraft version 1.8.9 and snapshot
-15w51b. However, it should work with all snapshots and versions between 1.8.9
-and snapshot 15w51b. It is unknown whether or not it will work with other
+16w02a. However, it should work with all snapshots and versions between 1.8.9
+and snapshot 16w02a. It is unknown whether or not it will work with other
 versions.
 
 The compiled EXE should work with Windows 7+, however it has only been tested
 with Windows 10 Build 10586.
+
+The Linux executable should work on most distributions (Debian, RHEL, SLES,
+SUSE, etc. based). It has only been tested in Ubuntu 15.10.
 
 #### License:
 This program is under the MIT license. More details are in the LICENSE file.
