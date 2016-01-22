@@ -14,6 +14,8 @@ import wx
 import json
 
 # Global variables:
+
+# List of biomes:
 biome_list = ["Beach", "Birch Forest", "Birch Forest Hills", "Cold Beach",
                 "Cold Taiga", "Cold Taiga Hills", "Deep Ocean", "Desert",
                 "Desert Hills", "Extreme Hills", "Extreme Hills+", "Forest",
@@ -24,9 +26,13 @@ biome_list = ["Beach", "Birch Forest", "Birch Forest Hills", "Cold Beach",
                 "River", "Roofed Forest", "Savanna", "Savanna Plateau",
                 "Stone Beach", "Swampland", "Taiga", "Taiga Hills"]
 
+# Determine system platform:
 os_ = sys.platform
+
+# Get the the home directory of the current user:
 home_dir = os.path.expanduser('~')
 
+# Generates proper directory for .minecraft folder based on platform:
 if os_ == 'linux2':
     start_path = "%s/.minecraft/saves" % (home_dir, )
 elif os_ == 'win32':
@@ -37,6 +43,10 @@ elif os_ == 'darwin':
 else:
     home_dir
 
+"""
+class -> Window:
+Main class for the program. Includes all of the logic.
+"""
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__(*args, **kwargs)
@@ -104,7 +114,7 @@ class Window(wx.Frame):
         for item in list(set(biome_list) - set(inlist)):
             self.unexplored_biomes.Append(item)
 
-    # Open file.
+    # Opens 'select directory' dialog and then reads stats file for information.
     def OnOpen(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
         dlg = wx.DirDialog(self, message="Choose the world folder.",
@@ -129,7 +139,7 @@ class Window(wx.Frame):
             encoded = [i.encode('utf-8') for i in explored_biomes]
         self.WriteToPage(encoded)
 
-    # Quit command.
+    # Quits program.
     def OnQuit(self, e):
         self.Close()
 
