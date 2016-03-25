@@ -77,16 +77,29 @@ class Window(wx.Frame):
         MainPanel = wx.Panel(self)
 
         # Listbox for explored biomes.
-        panel1 = wx.Panel(MainPanel, -1, pos=(0,100))
-        self.explored_biomes = wx.ListBox(panel1, -1, size=(150,250),
+        panel1 = wx.Panel(MainPanel,
+                            -1,
+                            pos=(0,100))
+        self.explored_biomes = wx.ListBox(panel1,
+                                            -1,
+                                            size=(150,250),
                                             pos=(0,20))
-        wx.StaticText(panel1, id=-1, label="Discovered Biomes",
+        wx.StaticText(panel1,
+                        id=-1,
+                        label="Discovered Biomes",
                         style=wx.ALIGN_CENTER)
+
         # Listbox for unexplored biomes.
-        panel2 = wx.Panel(MainPanel, -1,pos=(0,200))
-        self.unexplored_biomes = wx.ListBox(panel2, -1, size=(150,250),
+        panel2 = wx.Panel(MainPanel,
+                            -1,
+                            pos=(0,200))
+        self.unexplored_biomes = wx.ListBox(panel2,
+                                                -1,
+                                                size=(150,250),
                                                 pos=(0,20))
-        wx.StaticText(panel2, id=-1, label="Undiscovered Biomes",
+        wx.StaticText(panel2,
+                        id=-1,
+                        label="Undiscovered Biomes",
                         style=wx.ALIGN_CENTER)
 
         # Set sizing for panels.
@@ -117,7 +130,8 @@ class Window(wx.Frame):
     # Opens 'select directory' dialog and then reads stats file for information.
     def OnOpen(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
-        dlg = wx.DirDialog(self, message="Choose the world folder.",
+        dlg = wx.DirDialog(self,
+                            message="Choose the world folder.",
                             defaultPath=start_path)
         if dlg.ShowModal() == wx.ID_OK:
             if os_ == 'win32':
