@@ -14,8 +14,8 @@ From here, you can either download the source or an EXE for Windows 7 and above.
 If you wish to use Python script instead of the EXE, these are the dependencies:
 - [Python 2.7](https://www.python.org/downloads/release/python-2711/)
 - [PythonWX](http://www.wxpython.org/)
-- Python JSON Module (included with Python 2.7.11)
-- Python OS Module (included with Python 2.7.11)
+- Python JSON Module (included with Python)
+- Python OS Module (included with Python)
 
 In order to ensure that you have all the correct packages installed, run:
 ```bash
