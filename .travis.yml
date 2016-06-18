@@ -1,0 +1,10 @@
+# Travis CI configuration for the project.
+language: python
+
+# Test with the most recent versions of Python 2.
+python:
+	- "2.7.10"
+	- "2.7.11"
+
+# Install the correct depedencies with pip.
+install: "pip install -r requirements.txt"
