@@ -6,16 +6,21 @@ This program lists the biomes that a Minecraft player has traveled to and what
 biomes they have not. It is intended to help those with the "Adventuring Time"
 achievement.
 
-#### Installation/Download:
-To install, please refer to the [releases page.](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases)
-From here, you can either download the source or an EXE for Windows 7+.
+#### Download:
+To download the program, please refer to the [releases page.](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases)
+From here, you can either download the source or an EXE for Windows 7 and above.
 
 #### Dependencies:
 If you wish to use Python script instead of the EXE, these are the dependencies:
-- [Python 2.7.11](https://www.python.org/downloads/release/python-2711/)
+- [Python 2.7](https://www.python.org/downloads/release/python-2711/)
 - [PythonWX](http://www.wxpython.org/)
 - Python JSON Module (included with Python 2.7.11)
 - Python OS Module (included with Python 2.7.11)
+
+In order to ensure that you have all the correct packages installed, run:
+```bash
+$ [sudo] pip install -r requirements.txt
+```
 
 #### How to use:
 If you have the EXE, just double click the executable. No administrator
@@ -23,7 +28,7 @@ permissions needed. To run the Python script, navigate to the folder where the
 script is, and run this command:
 
 ```bash
-python main.py
+$ python main.py
 ```
 
 If there are any errors, make sure you have all the dependencies installed.
