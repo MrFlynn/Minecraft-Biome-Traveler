@@ -19,7 +19,7 @@ If you wish to use Python script instead of the EXE, these are the dependencies:
 
 In order to ensure that you have all the correct packages installed, run:
 ```bash
-$ [sudo] pip install -r requirements.txt
+$ sudo apt-get install python-wxgtk2.8
 ```
 
 #### How to use:
