@@ -10,3 +10,4 @@ dist/
 
 # Ignore compiled shit.
 .main.py.swp
+.idea/workspace.xml
