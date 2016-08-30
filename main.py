@@ -45,7 +45,7 @@ else:
 
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
-        super(Window, self).__init__(*args, **kwargs)
+        super(Window, self).__init__(style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER, *args, **kwargs)
         self.init_ui()
 
     # Create startup UI.
@@ -83,12 +83,13 @@ class Window(wx.Frame):
 
         # Set sizing for panels.
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add(db_panel,0,wx.EXPAND|wx.ALL,border=10)
-        sizer.Add(udb_panel,0,wx.EXPAND|wx.ALL,border=10)
+        sizer.Add(db_panel, 0, wx.EXPAND | wx.ALL, border=10)
+        sizer.Add(udb_panel, 0, wx.EXPAND | wx.ALL, border=10)
         main_panel.SetSizer(sizer)
 
-        # Set Window size, name, and show the window.
-        self.SetSize((375, 350))
+        # Set Window size, name, icon, and show the window.
+        self.SetIcon(wx.Icon(sys.executable, wx.BITMAP_TYPE_ICO))
+        self.SetSize((346, 340))
         self.SetTitle('Biome Traveler')
         self.Show(True)
 
