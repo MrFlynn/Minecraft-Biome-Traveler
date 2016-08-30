@@ -40,7 +40,7 @@ elif os_ == 'win32':
 elif os_ == 'darwin':
     start_path = ("%s/Library/Application Support/minecraft/saves" % (home_dir,))
 else:
-    home_dir
+    start_path = home_dir
 
 
 class Window(wx.Frame):
@@ -109,13 +109,15 @@ class Window(wx.Frame):
     # Opens 'select directory' dialog and then reads stats file for information.
     def on_open(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
-        dlg = wx.DirDialog(self, message="Choose the world folder.", defaultPath=start_path)
-        if dlg.ShowModal() == wx.ID_OK:
+        file_dialog = wx.DirDialog(self, message="Choose the world folder.", defaultPath=start_path)
+        if file_dialog.ShowModal() == wx.ID_OK:
             if os_ == 'win32':
-                world_stats_dir = dlg.GetPath() + "\stats\\"
-            else: # for linux, darwin, and other.
-                world_stats_dir = dlg.GetPath() + "/stats/"
-        dlg.Destroy()
+                world_stats_dir = file_dialog.GetPath() + "\stats\\"
+            elif os_ == 'linux2' or os_ == 'darwin':
+                world_stats_dir = file_dialog.GetPath() + "/stats/"
+            else:
+                world_stats_dir = file_dialog.GetPath()
+        file_dialog.Destroy()
 
         # Finds .json file with stats info. Outputs file name.
         for file in os.listdir(world_stats_dir):
