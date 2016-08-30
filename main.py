@@ -38,75 +38,54 @@ if os_ == 'linux2':
 elif os_ == 'win32':
     start_path = "%s\AppData\Roaming\.minecraft\saves" % (home_dir, )
 elif os_ == 'darwin':
-    start_path = ("%s/Library/Application Support/minecraft/saves"
-                    % (home_dir,))
+    start_path = ("%s/Library/Application Support/minecraft/saves" % (home_dir,))
 else:
     home_dir
 
-"""
-class -> Window:
-Main class for the program. Includes all of the logic.
-"""
+
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__(*args, **kwargs)
-        # Initialize UI.
-        self.InitUI()
+        self.init_ui()
 
     # Create startup UI.
-    def InitUI(self):
+    def init_ui(self):
 
         # Create Menu
-        menubar = wx.MenuBar()
-        fileMenu = wx.Menu()
+        menu_bar = wx.MenuBar()
+        file_menu = wx.Menu()
 
-        # - Open folder containing world statistics.
-        omi = wx.MenuItem(fileMenu, wx.ID_OPEN, '&Open World Folder\tCtrl+O')
-        fileMenu.AppendItem(omi)
-        self.Bind(wx.EVT_MENU, self.OnOpen, omi)
-        # - Quit menu item with keybord shortcut (ctrl + w).
-        qmi = wx.MenuItem(fileMenu, wx.ID_EXIT, '&Quit\tCtrl+W')
-        fileMenu.AppendItem(qmi)
-        self.Bind(wx.EVT_MENU, self.OnQuit, qmi)
+        # Open folder containing world statistics.
+        omi = wx.MenuItem(file_menu, wx.ID_OPEN, '&Open World Folder\tCtrl+O')
+        file_menu.AppendItem(omi)
+        self.Bind(wx.EVT_MENU, self.on_open, omi)
+        # Quit menu item with keyboard shortcut (ctrl + w).
+        qmi = wx.MenuItem(file_menu, wx.ID_EXIT, '&Quit\tCtrl+W')
+        file_menu.AppendItem(qmi)
+        self.Bind(wx.EVT_MENU, self.on_quit, qmi)
 
-        # Create menubar.
-        menubar.Append(fileMenu, '&File')
-        self.SetMenuBar(menubar)
+        # Create menu_bar.
+        menu_bar.Append(file_menu, '&File')
+        self.SetMenuBar(menu_bar)
 
         # Create Panels.
-        MainPanel = wx.Panel(self)
+        main_panel = wx.Panel(self)
 
         # Listbox for explored biomes.
-        panel1 = wx.Panel(MainPanel,
-                            -1,
-                            pos=(0,100))
-        self.explored_biomes = wx.ListBox(panel1,
-                                            -1,
-                                            size=(150,250),
-                                            pos=(0,20))
-        wx.StaticText(panel1,
-                        id=-1,
-                        label="Discovered Biomes",
-                        style=wx.ALIGN_CENTER)
+        db_panel = wx.Panel(main_panel, -1, pos=(0,100))
+        self.explored_biomes = wx.ListBox(db_panel, -1, size=(150,250), pos=(0,20))
+        wx.StaticText(db_panel, id=-1, label="Discovered Biomes", style=wx.ALIGN_CENTER)
 
         # Listbox for unexplored biomes.
-        panel2 = wx.Panel(MainPanel,
-                            -1,
-                            pos=(0,200))
-        self.unexplored_biomes = wx.ListBox(panel2,
-                                                -1,
-                                                size=(150,250),
-                                                pos=(0,20))
-        wx.StaticText(panel2,
-                        id=-1,
-                        label="Undiscovered Biomes",
-                        style=wx.ALIGN_CENTER)
+        udb_panel = wx.Panel(main_panel, -1, pos=(0,200))
+        self.unexplored_biomes = wx.ListBox(udb_panel, -1, size=(150,250), pos=(0,20))
+        wx.StaticText(udb_panel, id=-1, label="Undiscovered Biomes", style=wx.ALIGN_CENTER)
 
         # Set sizing for panels.
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add(panel1,0,wx.EXPAND|wx.ALL,border=10)
-        sizer.Add(panel2,0,wx.EXPAND|wx.ALL,border=10)
-        MainPanel.SetSizer(sizer)
+        sizer.Add(db_panel,0,wx.EXPAND|wx.ALL,border=10)
+        sizer.Add(udb_panel,0,wx.EXPAND|wx.ALL,border=10)
+        main_panel.SetSizer(sizer)
 
         # Set Window size, name, and show the window.
         self.SetSize((375, 350))
@@ -114,7 +93,7 @@ class Window(wx.Frame):
         self.Show(True)
 
     # Writes biomes to respective lists and clear them on reload.
-    def WriteToPage(self, inlist):
+    def write_to_page(self, inlist):
         # Clear listboxes to prevent duplicates.
         self.explored_biomes.Clear()
         self.unexplored_biomes.Clear()
@@ -128,11 +107,9 @@ class Window(wx.Frame):
             self.unexplored_biomes.Append(item)
 
     # Opens 'select directory' dialog and then reads stats file for information.
-    def OnOpen(self, e):
+    def on_open(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
-        dlg = wx.DirDialog(self,
-                            message="Choose the world folder.",
-                            defaultPath=start_path)
+        dlg = wx.DirDialog(self, message="Choose the world folder.", defaultPath=start_path)
         if dlg.ShowModal() == wx.ID_OK:
             if os_ == 'win32':
                 world_stats_dir = dlg.GetPath() + "\stats\\"
@@ -151,10 +128,10 @@ class Window(wx.Frame):
                                 .get("achievement.exploreAllBiomes")
                                 .get("progress"))
             encoded = [i.encode('utf-8') for i in explored_biomes]
-        self.WriteToPage(encoded)
+        self.write_to_page(encoded)
 
     # Quits program.
-    def OnQuit(self, e):
+    def on_quit(self, e):
         self.Close()
 
 # Run the application:
