@@ -46,10 +46,6 @@ else:
 class Window(wx.Frame):
     def __init__(self, *args, **kwargs):
         super(Window, self).__init__(style=wx.DEFAULT_FRAME_STYLE ^ wx.RESIZE_BORDER, *args, **kwargs)
-        self.init_ui()
-
-    # Create startup UI.
-    def init_ui(self):
 
         # Create Menu
         menu_bar = wx.MenuBar()
@@ -59,6 +55,7 @@ class Window(wx.Frame):
         omi = wx.MenuItem(file_menu, wx.ID_OPEN, '&Open World Folder\tCtrl+O')
         file_menu.AppendItem(omi)
         self.Bind(wx.EVT_MENU, self.on_open, omi)
+
         # Quit menu item with keyboard shortcut (ctrl + w).
         qmi = wx.MenuItem(file_menu, wx.ID_EXIT, '&Quit\tCtrl+W')
         file_menu.AppendItem(qmi)
@@ -72,19 +69,19 @@ class Window(wx.Frame):
         main_panel = wx.Panel(self)
 
         # Listbox for explored biomes.
-        db_panel = wx.Panel(main_panel, -1, pos=(0,100))
-        self.explored_biomes = wx.ListBox(db_panel, -1, size=(150,250), pos=(0,20))
-        wx.StaticText(db_panel, id=-1, label="Discovered Biomes", style=wx.ALIGN_CENTER)
+        eb_panel = wx.Panel(main_panel, -1, pos=(0,100))
+        self.explored_biomes_panel = wx.ListBox(eb_panel, -1, size=(150,250), pos=(0,20))
+        wx.StaticText(eb_panel, id=-1, label="Discovered Biomes", style=wx.ALIGN_CENTER)
 
         # Listbox for unexplored biomes.
-        udb_panel = wx.Panel(main_panel, -1, pos=(0,200))
-        self.unexplored_biomes = wx.ListBox(udb_panel, -1, size=(150,250), pos=(0,20))
-        wx.StaticText(udb_panel, id=-1, label="Undiscovered Biomes", style=wx.ALIGN_CENTER)
+        ueb_panel = wx.Panel(main_panel, -1, pos=(0,200))
+        self.unexplored_biomes_panel = wx.ListBox(ueb_panel, -1, size=(150,250), pos=(0,20))
+        wx.StaticText(ueb_panel, id=-1, label="Undiscovered Biomes", style=wx.ALIGN_CENTER)
 
         # Set sizing for panels.
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add(db_panel, 0, wx.EXPAND | wx.ALL, border=10)
-        sizer.Add(udb_panel, 0, wx.EXPAND | wx.ALL, border=10)
+        sizer.Add(eb_panel, 0, wx.EXPAND | wx.ALL, border=10)
+        sizer.Add(ueb_panel, 0, wx.EXPAND | wx.ALL, border=10)
         main_panel.SetSizer(sizer)
 
         # Set Window size, name, icon, and show the window.
@@ -94,44 +91,42 @@ class Window(wx.Frame):
         self.Show(True)
 
     # Writes biomes to respective lists and clear them on reload.
-    def write_to_page(self, inlist):
+    def write_to_page(self, input_list):
         # Clear listboxes to prevent duplicates.
-        self.explored_biomes.Clear()
-        self.unexplored_biomes.Clear()
+        self.explored_biomes_panel.Clear()
+        self.unexplored_biomes_panel.Clear()
 
         # Appends to explored biomes listbox.
-        for item in inlist:
-            self.explored_biomes.Append(item)
+        for item in input_list:
+            self.explored_biomes_panel.Append(item)
 
         # Appends to unexplored biomes listbox.
-        for item in list(set(biome_list) - set(inlist)):
-            self.unexplored_biomes.Append(item)
+        for item in list(set(biome_list) - set(input_list)):
+            self.unexplored_biomes_panel.Append(item)
+            
+    # Gets stats file, reads contents, and encodes the list.
+    def get_stats_file(self, stats_dir):
+        # Finds .json file with stats info and gets applicable stats.
+        for file in os.listdir(stats_dir):
+            if file.endswith(".json"):
+                with open(stats_dir + file, "r") as stats:
+                    explored_biomes = (json.loads(stats.read()).get("achievement.exploreAllBiomes").get("progress"))
+                    encoded = [i.encode('utf-8') for i in explored_biomes]
+
+        self.write_to_page(encoded)
 
     # Opens 'select directory' dialog and then reads stats file for information.
     def on_open(self, e):
         # Opens 'select folder' dialog and outputs the chosen directory.
-        file_dialog = wx.DirDialog(self, message="Choose the world folder.", defaultPath=start_path)
+        file_dialog = wx.DirDialog(self, message="Choose World", defaultPath=start_path)
         if file_dialog.ShowModal() == wx.ID_OK:
             if os_ == 'win32':
-                world_stats_dir = file_dialog.GetPath() + "\stats\\"
+                self.get_stats_file(file_dialog.GetPath() + "\stats\\")
             elif os_ == 'linux2' or os_ == 'darwin':
-                world_stats_dir = file_dialog.GetPath() + "/stats/"
+               self.get_stats_file(file_dialog.GetPath() + "/stats/")
             else:
-                world_stats_dir = file_dialog.GetPath()
+                self.get_stats_file(file_dialog.GetPath())
         file_dialog.Destroy()
-
-        # Finds .json file with stats info. Outputs file name.
-        for file in os.listdir(world_stats_dir):
-            if file.endswith(".json"):
-                stats_file_name = file
-
-        # Opens stats file and extracts list of explored biomes.
-        with open(world_stats_dir + stats_file_name, "r") as stats_file:
-            explored_biomes = ((json.loads(stats_file.read()))
-                                .get("achievement.exploreAllBiomes")
-                                .get("progress"))
-            encoded = [i.encode('utf-8') for i in explored_biomes]
-        self.write_to_page(encoded)
 
     # Quits program.
     def on_quit(self, e):
