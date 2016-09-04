@@ -12,6 +12,8 @@ with that achievement.
 ### Windows:
 I have compiled the program for Windows 7, 8, 8.1, and 10. Go to the [releases page](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases) to download the .exe for Windows.
 
+If you run into an error R6034, you have to download [Visual Studio Redistributable 2008](https://www.microsoft.com/en-us/download/details.aspx?id=29).
+
 ### Linux and macOS:
 Since I have compiled the application for Windows, the process is a little 
 more involved on Linux and macOS.
