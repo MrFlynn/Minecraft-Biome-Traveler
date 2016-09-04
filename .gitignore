@@ -6,7 +6,6 @@
 # Ignore PyInstaller Files:
 build/
 dist/
-*.spec
 
 # Ignore swap files.
 .main.py.swp
