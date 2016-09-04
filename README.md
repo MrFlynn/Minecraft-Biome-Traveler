@@ -1,61 +1,59 @@
 # Biome Traveler
 ### Nick Pleatsikas - [pleatsikas.me](http://pleatsikas.me)
 
-#### Description:
-This program lists the biomes that a Minecraft player has traveled to and what
-biomes they have not. It is intended to help those with the "Adventuring Time"
-achievement.
+## Description:
+One of the final achievements in Minecraft is to explore "all" (in reality, you only 
+you only have to explore 95% of the biomes in the game). However, Mojang doesn't 
+provide a way to track your progress. This applications helps you track your progress 
+with that achievement.
 
-#### Download:
-To download the program, please refer to the [releases page.](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases)
-From here, you can either download the source or an EXE for Windows 7 and above.
+## Running the Program:
 
-#### Dependencies:
-If you wish to use Python script instead of the EXE, these are the dependencies:
-- [Python 2.7](https://www.python.org/downloads/release/python-2711/)
-- [PythonWX](http://www.wxpython.org/)
-- Python JSON Module (included with Python)
-- Python OS Module (included with Python)
+### Windows:
+I have compiled the program for Windows 7,8,8.1, and 10. Go to the [releases page](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases) to download the .exe for Windows.
 
-In order to ensure that you have all the correct packages installed, run:
+### Linux and macOS:
+Since I have compiled the application for Windows, the process is a little 
+more involved on Linux and macOS.
+
+To run the program, download the source code zip on the releases page. Then 
+refer to the dependencies below to install.
+
+#### Linux Dependencies:
+To install the proper dependencies, run this command:
 ```bash
-$ sudo apt-get install python-wxgtk2.8
+$ sudo apt-get install python python-wxgtk2.8
 ```
 
-#### How to use:
-If you have the EXE, just double click the executable. No administrator
-permissions needed. To run the Python script, navigate to the folder where the
-script is, and run this command:
+#### macOS Dependencies:
+I would recommend installing [homebrew](http://brew.sh/) before continuing.
 
+Once you have homebrew installed, open the terminal and run these commands 
+to install the proper dependencies:
 ```bash
-$ python main.py
+$ brew install python
+$ brew install pythonwx
 ```
 
-If there are any errors, make sure you have all the dependencies installed.
+#### Run the Application:
+Unzip the source, change into the source directory, and run the application with 
+the python interpreter.
+```bash
+python main.py
+```
 
-From here, it should open a GUI with two empty lists. To load the biomes
-traveled to and ones that have yet to be found select "File" -> "Open World Folder."
-(1) This will open a window with all of your Minecraft saves. Select the one you
-wish to see stats on and then click "Open" or "Open Folder." You should see a
-list of biomes you have explored and which ones you need to explore in order
-to complete the Adventuring Time achievement.
+## How to Use the Application:
+1. When the application opens, click *File* and then *Open World Folder*
+2. Using the folder selection dialog select the folder where your save resides.
+3. The application should now display the biomes which you have explored and those you have 
+not.
 
-**NOTE**: This program doesn't auto-reload the biome lists. The above process
-from (1) has to be redone in order to reload the biome lists.
+Since the application doesn't (yet) have a mechanism for updating as you 
+explore, you will have to periodically reopen the world starting at step 
+1. as listed above.
 
-![Biome Traveler Window](http://i.imgur.com/loDSS1R.png)
+## License:
+This application is listed under the MIT license. Essentially, the program is 
+provided as-is and I, as the developer, am no obligation to support it. However, 
+you are free to tinker and modify. I ask if you redistribute the code, to credit me.
 
-#### Compatibility:
-The program has only been tested with Minecraft version 1.8.9 and snapshot
-16w02a. However, it should work with all snapshots and versions between 1.8.9
-and snapshot 16w02a. It is unknown whether or not it will work with other
-versions.
-
-The compiled EXE should work with Windows 7+, however it has only been tested
-with Windows 10 Build 10586.
-
-The Linux executable should work on most distributions (Debian, RHEL, SLES,
-SUSE, etc. based). It has only been tested in Ubuntu 15.10.
-
-#### License:
-This program is under the MIT license. More details are in the LICENSE file.
