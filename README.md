@@ -10,7 +10,7 @@ with that achievement.
 ## Running the Program:
 
 ### Windows:
-I have compiled the program for Windows 7,8,8.1, and 10. Go to the [releases page](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases) to download the .exe for Windows.
+I have compiled the program for Windows 7, 8, 8.1, and 10. Go to the [releases page](https://github.com/MrFlynn/Minecraft-Biome-Traveler/releases) to download the .exe for Windows.
 
 ### Linux and macOS:
 Since I have compiled the application for Windows, the process is a little 
