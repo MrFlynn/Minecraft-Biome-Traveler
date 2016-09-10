@@ -41,7 +41,7 @@ $ brew install pythonwx
 Unzip the source, change into the source directory, and run the application with 
 the python interpreter.
 ```bash
-python main.py
+$ python main.py
 ```
 
 ## How to Use the Application:
