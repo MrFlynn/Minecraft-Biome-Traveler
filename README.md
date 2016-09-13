@@ -57,6 +57,6 @@ explore, you will have to periodically reopen the world starting at step
 ## License:
 This application is listed under the MIT license. Essentially the program is 
 provided as-is and I, as the developer, am under no obligation to support it. However, 
-you are free to tinker and modify it as you please. However, if you redistribute the 
+you are free to tinker and modify it as you please. If you redistribute the 
 code I would request that you credit me.
 
