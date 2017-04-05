@@ -1,6 +1,11 @@
 # Biome Traveler
 ### Nick Pleatsikas - [pleatsikas.me](http://pleatsikas.me)
 
+# THIS PROJECT IS NO LONGER MAINTAINED!
+I haven't really had time to work on this project over the past year or so. It still works (save for some weird UI issues on macOS), but things may break in the future.
+
+This program was always a super inelegant solution to the problem of tracking your progress for the "Adventuring Time" achievement, so I was never super satisfied with it (not to mention Python GUI frameworks are pretty awful). A more elegant solution (that is in-game, too!) can be found [here](https://www.reddit.com/r/Minecraft/comments/62l543/i_recreated_the_adventuring_time_achievement/).
+
 ## Description:
 One of the final achievements in Minecraft is to explore "all" (in reality, you only 
 you only have to explore 95% of the biomes in the game). However, Mojang doesn't 
